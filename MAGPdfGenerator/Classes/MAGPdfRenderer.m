@@ -57,7 +57,14 @@ static CGFloat const _defaultPageNumberFontSize = 12;
 }
 
 + (void)drawText:(NSString *)textToDraw inFrame:(CGRect)frameRect withAttributes:(NSDictionary<NSString *, id> *)attrs {
-    [textToDraw drawInRect:frameRect withAttributes:attrs];
+    CGSize size = [textToDraw sizeWithAttributes:attrs];
+    
+    CGRect r = CGRectMake(frameRect.origin.x,
+                          frameRect.origin.y + (frameRect.size.height - size.height)/2.0,
+                          frameRect.size.width,
+                          size.height);
+    
+    [textToDraw drawInRect:r withAttributes:attrs];
 }
 
 #pragma mark - Private methods
